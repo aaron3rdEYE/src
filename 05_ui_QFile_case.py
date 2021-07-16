@@ -1,15 +1,19 @@
 from PySide2.QtWidgets import QApplication, QMessageBox
 from PySide2.QtUiTools import QUiLoader
+from PySide2.QtCore import QFile
 
 class Stats:
 
     def __init__(self):
         # 从文件中加载UI定义
+        qfile_states = QFile('04_testui.ui')
+        qfile_states.open(QFile.ReadOnly)
+        qfile_states.close()
 
         # 从 UI 定义中动态 创建一个相应的窗口对象
         # 注意：里面的控件对象也成为窗口对象的属性了
         # 比如 self.ui.button , self.ui.textEdit
-        self.ui = QUiLoader().load('04_testui.ui')
+        self.ui = QUiLoader().load(qfile_states)
 
         self.ui.button.clicked.connect(self.handleCalc)
 
